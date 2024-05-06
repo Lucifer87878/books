@@ -1,29 +1,7 @@
 import { Link } from "react-router-dom";
 import "./BookList.scss";
 
-interface BookProps {
-  book: {
-    id: string;
-    cover_img: string;
-    title: string;
-    author: string | string[];
-    edition_count: number;
-    first_publish_year: number;
-  };
-  toggleFavorite: (id: string) => void;
-  toggleRead: (id: string) => void;
-}
-
-
-const Book: React.FC<BookProps> = ({ book, toggleFavorite, toggleRead }) => {
-  const handleToggleFavorite = () => {
-    toggleFavorite(book.id);
-  };
-
-  const handleToggleRead = () => {
-    toggleRead(book.id);
-  };
-
+const Book = (book) => {
   return (
     <div className="book-item flex flex-column flex-sb">
       <div className="book-item-img">
@@ -35,7 +13,7 @@ const Book: React.FC<BookProps> = ({ book, toggleFavorite, toggleRead }) => {
             <span>{book.title}</span>
           </div>
         </Link>
-
+        
         <div className="book-item-info-item author fs-15">
           <span className="text-capitalize fw-7">Author: </span>
           <span>{Array.isArray(book.author) ? book.author.join(", ") : book.author}</span>
@@ -51,8 +29,6 @@ const Book: React.FC<BookProps> = ({ book, toggleFavorite, toggleRead }) => {
           <span>{book.first_publish_year}</span>
         </div>
 
-        <button onClick={handleToggleFavorite}>Toggle Favorite</button>
-        <button onClick={handleToggleRead}>Toggle Read</button>
       </div>
     </div>
   );

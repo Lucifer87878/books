@@ -1,5 +1,5 @@
 import { useGlobalContext } from '../../context';
-import Book from "../BookList/Book";
+import Book from "./Book";
 import Loading from '../Loader/Loader';
 import coverImg from '../../images/book-no-cover.jpg';
 import './BookList.scss';
@@ -17,7 +17,7 @@ const BookList = () => {
     }
   });
 
-  console.log(booksWithCovers)
+  console.log(booksWithCovers);
 
   if(loading) return <Loading />;
 

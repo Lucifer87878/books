@@ -5,11 +5,7 @@ import BookList from "./components/BookList/BookList";
 import BookDetails from "./components/BookDetails/BookDetails";
 import { AppProvider } from "./context";
 
-
-
-
 function App() {
-
 
   return (
     <>
@@ -29,3 +25,4 @@ function App() {
 }
 
 export default App;
+ 
