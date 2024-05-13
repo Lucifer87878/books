@@ -1,26 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-// Uppdatera RatingProps-gränssnittet för att inkludera rating-egenskapen
 interface RatingProps {
-    totalStars: number;
-    rating: number; // Lägg till rating-egenskapen
-    setRating: React.Dispatch<React.SetStateAction<number>>; // Typ för setRating
-  }
-  
+  totalStars: number;
+  rating: number;
+  setRating: React.Dispatch<React.SetStateAction<number>>;
+  onClick: (starIndex: number) => void;
+}
 
-const Rating: React.FC<RatingProps> = ({ totalStars }) => {
-  const [rating, setRating] = useState<number>(0);
 
-  const handleClick = (starIndex: number) => {
-    setRating(starIndex + 1);
-  };
-
+const Rating: React.FC<RatingProps> = ({ totalStars, rating, onClick }) => {
   return (
     <div>
       {[...Array(totalStars)].map((_, index) => (
         <span
           key={index}
-          onClick={() => handleClick(index)}
+          onClick={() => onClick(index)}
           style={{ cursor: 'pointer' }}
         >
           {index < rating ? '\u2605' : '\u2606'}
