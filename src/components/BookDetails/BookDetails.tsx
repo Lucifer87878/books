@@ -18,12 +18,23 @@ interface BookDetails {
 }
 
 const BookDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>(); 
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState<BookDetails | null>(null);
   const navigate = useNavigate();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    if (!isFavorite) {
+      localStorage.setItem(id!, JSON.stringify(book)); 
+    } else {
+      localStorage.removeItem(id!);
+    }
+  };
 
   useEffect(() => {
+    if (!id) return; 
     setLoading(true);
     async function getBookDetails() {
       try {
@@ -41,6 +52,10 @@ const BookDetails = () => {
             subjects: subjects ? subjects.join(", ") : "No Subjects found",
           };
           setBook(newBook);
+          
+          if (localStorage.getItem(id!) !== null) {
+            setIsFavorite(true);
+          }
         } else {
           setBook(null);
         }
@@ -85,6 +100,9 @@ const BookDetails = () => {
             <div className='book-details-item'>
               <span className='fw-6'>Subjects: </span>
               <span>{book.subjects}</span>
+              <button className='favorite-button' onClick={handleFavorite}>
+                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+              </button>
             </div>
           </div>
         </div>
