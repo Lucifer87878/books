@@ -10,20 +10,11 @@ function App() {
     <AppProvider>
       <Router>
         <Routes>
-          {/* Huvudroute för att omsluta alla andra rutter */}
           <Route path="/" element={<Home />}>
-
-            {/* Route för bokmärken */}
             <Route path="bookmarks" element={<Bookmarks />} />
-
-            {/* Route för att visa en lista över böcker */}
             <Route path="book" element={<BookList />} />
-
-          </Route>
-
-          {/* Oberoende route för att visa detaljer om en specifik bok */}
+            </Route>
           <Route path="/book/:id" element={<BookDetails />} />
-          
         </Routes>
       </Router>
     </AppProvider>
