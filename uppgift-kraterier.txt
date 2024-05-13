@@ -9,7 +9,7 @@ Exempelvis: titel, författare, bokens första mening
 baksidestexten om boken
 genre/topics för boken
 bokens omslag
-[ G ] Som användare vill jag kunna favoritmarkera en bok och kunna ta bort favoritmarkeringar.
+- ok - [ G ] Som användare vill jag kunna favoritmarkera en bok och kunna ta bort favoritmarkeringar.
 - ok - [ G ] Som användare vill jag kunna ta fram alla mina favoritmarkerade böcker
 [ G ] Som användare vill jag kunna lägga till att jag läst en bok. För den lästa boken vill jag kunna lägga till ett betyg, en recension och antal sidor boken var.
 Man får gärna hämta antal sidor ifrån APIet men inget krav.

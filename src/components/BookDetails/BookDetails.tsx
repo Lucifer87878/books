@@ -1,21 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loader/Loader';
-import coverImg from '../../images/book-no-cover.jpg';
 import './BookDetails.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { fetchBookDetails } from '../API/api';
+import type { BookDetails } from '../API/api';
 
-const URL = "https://openlibrary.org/works/";
-
-interface BookDetails {
-  description: string;
-  title: string;
-  cover_img: string;
-  subject_places: string;
-  subject_times: string;
-  subjects: string;
-}
 
 const BookDetails = () => {
   const { id } = useParams<{ id?: string }>(); 
@@ -23,7 +14,7 @@ const BookDetails = () => {
   const [book, setBook] = useState<BookDetails | null>(null);
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
-
+  
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
     if (!isFavorite) {
@@ -32,40 +23,19 @@ const BookDetails = () => {
       localStorage.removeItem(id!);
     }
   };
-
+  
   useEffect(() => {
     if (!id) return; 
     setLoading(true);
-    async function getBookDetails() {
-      try {
-        const response = await fetch(`${URL}${id}.json`);
-        const data = await response.json();
-
-        if (data) {
-          const { description, title, covers, subject_places, subject_times, subjects } = data;
-          const newBook: BookDetails = {
-            description: description ? description.value : "No description found",
-            title: title,
-            cover_img: covers && covers.length > 0 ? `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg` : coverImg,
-            subject_places: subject_places ? subject_places.join(", ") : "No Subject places found",
-            subject_times: subject_times ? subject_times.join(", ") : "No Subject times found",
-            subjects: subjects ? subjects.join(", ") : "No Subjects found",
-          };
-          setBook(newBook);
-          
-          if (localStorage.getItem(id!) !== null) {
-            setIsFavorite(true);
-          }
-        } else {
-          setBook(null);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
+    
+    fetchBookDetails(id).then((bookData) => {
+      if (bookData) {
+        setBook(bookData);
+      } else {
+        setBook(null);
       }
-    }
-    getBookDetails();
+      setLoading(false);
+    });
   }, [id]);
 
   if (loading) return <Loading />;
