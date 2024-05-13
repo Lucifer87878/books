@@ -100,9 +100,11 @@ const BookDetails = () => {
             <div className='book-details-item'>
               <span className='fw-6'>Subjects: </span>
               <span>{book.subjects}</span>
+              <div>
               <button className='favorite-button' onClick={handleFavorite}>
                 {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
               </button>
+              </div>
             </div>
           </div>
         </div>

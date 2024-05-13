@@ -12,17 +12,21 @@ const Bookmarks = () => {
         <p>No favorite books yet.</p>
       ) : (
         <ul>
-          {favoriteBooks.map((book: BookDetails) => (
-            <li key={book.title}>
+          {favoriteBooks.map((book: BookDetails, index: number) => (
+            <li key={index}>
               <div>
-                <img src={book.cover_img} alt={book.title} />
-              </div>
-              <div>
-                <h3>{book.title}</h3>
-                <p>{book.description}</p>
-                <p>Subject Places: {book.subject_places}</p>
-                <p>Subject Times: {book.subject_times}</p>
-                <p>Subjects: {book.subjects}</p>
+                <div className='book-details-content grid'>
+                  <div className='book-details-img'>
+                    <img src={book.cover_img} alt={book.title} />
+                  </div>
+                  <div>
+                    <h3>{book.title}</h3>
+                    <p>{book.description}</p>
+                    <p>{book.subject_places}</p>
+                    <p>{book.subject_times}</p>
+                    <p>{book.subjects}</p>
+                  </div>
+                </div>
               </div>
             </li>
           ))}

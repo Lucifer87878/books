@@ -1,0 +1,36 @@
+- ok - [ G ] Ditt projekt efterlever reglerna i bilden: 
+- ok - [ G ] Du använder React med komponenter, JSX, conditional rendering, inbyggda hooks och dina egna custom hooks. Du använder routing för att visa upp olika vyer (exvis React Router). Du har någon form av globalt state (exvis med Context, Redux eller Zustand).
+- ok - [ G ] Du skapar en snygg väl fungerande applikation
+[ G ] Du arbetar tillsammans med din basgrupp(er) och utför de uppgifter ni är ålagda.
+- ok - [ G ] Du skapar en designskiss i Figma och länkar till den från ditt designdokument
+- ok - [ G ] Du använder dig av Custom Hooks
+- ok - [ G ] Som användare vill jag kunna söka på en bok och få upp viss information om boken.
+Exempelvis: titel, författare, bokens första mening
+baksidestexten om boken
+genre/topics för boken
+bokens omslag
+[ G ] Som användare vill jag kunna favoritmarkera en bok och kunna ta bort favoritmarkeringar.
+- ok - [ G ] Som användare vill jag kunna ta fram alla mina favoritmarkerade böcker
+[ G ] Som användare vill jag kunna lägga till att jag läst en bok. För den lästa boken vill jag kunna lägga till ett betyg, en recension och antal sidor boken var.
+Man får gärna hämta antal sidor ifrån APIet men inget krav.
+[ G ] Som användare vill jag kunna se alla mina lästa böcker.
+[ G ] Som användare vill jag kunna se antal sidor jag läst och antal böcker jag läst
+
+
+
+
+
+const BookmarkIcon = ({ fill }: Record<string, string>) => {
+  return (
+    <>
+      <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"
+          fill={fill}
+        />
+      </svg>
+    </>
+  );
+};
+
+export default BookmarkIcon;
