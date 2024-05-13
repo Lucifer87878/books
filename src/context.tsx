@@ -32,9 +32,7 @@ const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     setLoading(true);
     try {
       const response = await fetch(`${URL}${searchTerm}`);
-      console.log("Searched for:", searchTerm);
       const data = await response.json();
-      console.log("API response:", data);
       const { docs } = data;
   
       if (docs) {
