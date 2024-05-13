@@ -20,10 +20,22 @@
         }
 
         .book-details-item {
-            margin-left: 1rem; /* Lägg till mellanrum mellan bilden och texten */
+            margin-left: 2rem; /* Lägg till mellanrum mellan bilden och texten */
 
             &.description {
                 opacity: 0.8;
+            }
+
+            .Favo_title {
+                font-size: 1.5rem; /* Exempel på hur du kan anpassa textens utseende */
+                margin-bottom: 0.5rem;
+            }
+
+            .Favo_places,
+            .Favo_times,
+            .Favo_subjects {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
             }
         }
     }
@@ -44,3 +56,4 @@
         max-width: 100%;
     }
 }
+
