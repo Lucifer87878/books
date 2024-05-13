@@ -10,9 +10,7 @@ const Header = () => {
         <div className="header-content flex flex-c text-conter text-white">
           <h2 className="header-titel text-capitalize">find your book </h2>
           <br />
-          <p className="header-text fs-18 fw-3">Lorem ipsum dolor sit amet, 
-          consectetur adipisicing elit. 
-          Saepe totam ex iste quod, modi suscipit.</p>
+          <p className="header-text fs-18 fw-3">Search for your next favorite book</p>
           <SearchForm />
         </div>
       </header>
