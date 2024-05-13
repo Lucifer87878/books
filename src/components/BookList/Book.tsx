@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import "./BookList.scss";
 
-const Book = (book) => {
+interface BookProps {
+  id: string;
+  cover_img: string;
+  title: string;
+  author: string | string[];
+  edition_count: number;
+  first_publish_year: number;
+}
+
+const Book: React.FC<{ book: BookProps }> = ({ book }) => {
   return (
     <div className="book-item flex flex-column flex-sb">
       <div className="book-item-img">
