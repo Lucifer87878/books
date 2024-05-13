@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loader/Loader';
-import './BookDetails.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { fetchBookDetails } from '../API/api';
 import type { BookDetails } from '../API/api';
+import Rating from '../Rating/Rating'; // Importera Rating-komponenten
+import { MdBookmarkRemove, MdBookmarks } from 'react-icons/md';
+
 
 
 const BookDetails = () => {
@@ -14,7 +16,9 @@ const BookDetails = () => {
   const [book, setBook] = useState<BookDetails | null>(null);
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
-  
+  const [rating, setRating] = useState(0); // Ny state för betyg
+
+  // Funktion för att hantera favoritstatus
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
     if (!isFavorite) {
@@ -23,7 +27,13 @@ const BookDetails = () => {
       localStorage.removeItem(id!);
     }
   };
-  
+
+  // Funktion för att hantera betygsändringar
+ const handleClick = (starIndex: number) => {
+    setRating(starIndex + 1);
+    localStorage.setItem(`${id}_rating`, String(starIndex + 1)); // Spara betyget i localStorage
+  };
+
   useEffect(() => {
     if (!id) return; 
     setLoading(true);
@@ -31,6 +41,12 @@ const BookDetails = () => {
     fetchBookDetails(id).then((bookData) => {
       if (bookData) {
         setBook(bookData);
+        const storedRating = localStorage.getItem(`${id}_rating`);
+        if (storedRating) {
+          setRating(parseInt(storedRating));
+        }
+        const storedFavorite = localStorage.getItem(id!);
+        setIsFavorite(storedFavorite !== null); // Uppdatera favoritstatus baserat på om boken finns i localStorage
       } else {
         setBook(null);
       }
@@ -71,10 +87,14 @@ const BookDetails = () => {
               <span className='fw-6'>Subjects: </span>
               <span>{book.subjects}</span>
               <div>
-              <button className='favorite-button' onClick={handleFavorite}>
-                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-              </button>
+                <button className='favorite-button' onClick={handleFavorite}>
+                  {isFavorite ? <MdBookmarkRemove /> : <MdBookmarks />}
+                </button>
               </div>
+            </div>
+            <div className='book-details-item'>
+              <span className='fw-6'>Rating: </span>
+              <Rating totalStars={5} rating={rating} setRating={setRating} onClick={handleClick} />
             </div>
           </div>
         </div>
